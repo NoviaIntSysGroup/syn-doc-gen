@@ -1,0 +1,430 @@
+
+{
+    "text_paragraph": [
+        {
+            "paramKey": "HeatExchangerName",
+            "schemaInfo": {
+                "label": "HeatExchangerName",
+                "description": "Name of the heat exchanger described in the data sheet",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "HEX31011",
+                "unit": null
+            },
+            "content_refs": [2]
+        },
+        {
+            "paramKey": "HeatExchangerType",
+            "schemaInfo": {
+                "label": "HeatExchangerType",
+                "description": "Type of heat exchanger, like Tube/Plate/Shell/Gasket plate - heat exchanger",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "Gasketed plate heat exchanger",
+                "unit": null
+            },
+            "content_refs": [3]
+        }
+    ],
+    "text_list": [
+        {
+            "paramKey": "CleaningMethod",
+            "schemaInfo": {
+                "label": "CleaningMethod",
+                "description": "Method to clean the heat exchanger",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "CIP",
+                "unit": null
+            },
+            "content_refs": [27]
+        },
+        {
+            "paramKey": "GasketAttachmendMechanism",
+            "schemaInfo": {
+                "label": "GasketAttachmendMechanism",
+                "description": "Gasket attachmend mechanism",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "GasketGrip",
+                "unit": null
+            },
+            "content_refs": [35]
+        },
+        {
+            "paramKey": "FluidDistributionDesign",
+            "schemaInfo": {
+                "label": "FluidDistributionDesign",
+                "description": "Fluid distribution design to optimize flow of fluids across heat transfer surface",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "FluDistDesigner",
+                "unit": null
+            },
+            "content_refs": [34]
+        },
+        {
+            "paramKey": "PortHoleDesign",
+            "schemaInfo": {
+                "label": "PortHoleDesign",
+                "description": "Port design to improve fluid flow",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "DeltaPort",
+                "unit": null
+            },
+            "content_refs": [37]
+        }
+    ],
+    "table_simple": [
+        {
+            "paramKey": "FullHeightAD",
+            "schemaInfo": {
+                "label": "FullHeightAD",
+                "description": "Full height of the heat exchanger of frame type AD",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 850,
+                "unit": "mm"
+            },
+            "content_refs": [58],
+            "unitConversion": {
+                "adj_gt": {
+                    "value": 85.0,
+                    "unit": "cm"
+                },
+                "schemaInfo_update": {
+                    "desiredUnit": "cm"
+                }
+            }
+        },
+        {
+            "paramKey": "FullWidthAD",
+            "schemaInfo": {
+                "label": "FullWidthAD",
+                "description": "Full width of the heat exchanger of frame type AD",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 420,
+                "unit": "mm"
+            },
+            "content_refs": [59],
+            "unitConversion": {
+                "adj_gt": {
+                    "value": 42.0,
+                    "unit": "cm"
+                },
+                "schemaInfo_update": {
+                    "desiredUnit": "cm"
+                }
+            }
+        },
+        {
+            "paramKey": "FullHeightALB",
+            "schemaInfo": {
+                "label": "FullHeightALB",
+                "description": "Full height of the heat exchanger of frame type ALB",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 900,
+                "unit": "mm"
+            },
+            "content_refs": [66],
+            "unitConversion": {
+                "adj_gt": {
+                    "value": 90.0,
+                    "unit": "cm"
+                },
+                "schemaInfo_update": {
+                    "desiredUnit": "cm"
+                }
+            }
+        },
+        {
+            "paramKey": "FullWidthALB",
+            "schemaInfo": {
+                "label": "FullWidthALB",
+                "description": "Full width of the heat exchanger of frame type ALB",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 412,
+                "unit": "mm"
+            },
+            "content_refs": [67],
+            "unitConversion": {
+                "adj_gt": {
+                    "value": 0.412,
+                    "unit": "m"
+                },
+                "schemaInfo_update": {
+                    "desiredUnit": "m"
+                }
+            }
+        },
+        {
+            "paramKey": "FramePlateMaterial",
+            "schemaInfo": {
+                "label": "FramePlateMaterial",
+                "description": "Material of frame plate",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "Carbon steel, epoxy painted",
+                "unit": null
+            },
+            "content_refs": [92]
+        },
+        {
+            "paramKey": "FieldGasketsMaterial",
+            "schemaInfo": {
+                "label": "FieldGasketsMaterial",
+                "description": "Material of the field gaskets",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "CGB, XGBL",
+                "unit": null
+            },
+            "content_refs": [88]
+        },
+        {
+            "paramKey": "ADPEDMaxDesignPressure",
+            "schemaInfo": {
+                "label": "ADPEDMaxDesignPressure",
+                "description": "Max design pressure for frame type AD with PED",
+                "type": "object",
+                "desiredUnit": "bar"
+            },
+            "gt_value": {
+                "value": 9.0,
+                "unit": "bar"
+            },
+            "content_refs": [101],
+            "unitConversion": {
+                "adj_gt": {
+                    "value": 900,
+                    "unit": "kPa"
+                },
+                "schemaInfo_update": {
+                    "desiredUnit": "kPa"
+                }
+            }
+        },
+        {
+            "paramKey": "ADpvcALSMaxDesignPressure",
+            "schemaInfo": {
+                "label": "ADpvcALSMaxDesignPressure",
+                "description": "Max design pressure for frame type AD with pvcALS",
+                "type": "object",
+                "desiredUnit": "bar"
+            },
+            "gt_value": {
+                "value": 9.5,
+                "unit": "bar"
+            },
+            "content_refs": [104],
+            "unitConversion": {
+                "adj_gt": {
+                    "value": 950,
+                    "unit": "kPa"
+                },
+                "schemaInfo_update": {
+                    "desiredUnit": "kPa"
+                }
+            }
+        },
+        {
+            "paramKey": "EGpvcALSMaxDesignPressure",
+            "schemaInfo": {
+                "label": "EGpvcALSMaxDesignPressure",
+                "description": "Max design pressure for frame type EG with pvcALS",
+                "type": "object",
+                "desiredUnit": "bar"
+            },
+            "gt_value": {
+                "value": 11.5,
+                "unit": "bar"
+            },
+            "content_refs": [107]
+        },
+        {
+            "paramKey": "EGASMEMaxDesignTemp",
+            "schemaInfo": {
+                "label": "EGASMEMaxDesignTemp",
+                "description": "Max temerature for frame type EG with ASME",
+                "type": "object",
+                "desiredUnit": "°C"
+            },
+            "gt_value": {
+                "value": 240,
+                "unit": "°C"
+            },
+            "content_refs": [111]
+        },
+        {
+            "paramKey": "EGPEDMaxDesignTemp",
+            "schemaInfo": {
+                "label": "EGPEDMaxDesignTemp",
+                "description": "Max temerature for frame type EG with PED",
+                "type": "object",
+                "desiredUnit": "°C"
+            },
+            "gt_value": {
+                "value": 180,
+                "unit": "°C"
+            },
+            "content_refs": [114]
+        },
+        {
+            "paramKey": "HeatTransferPlatesMaterial",
+            "schemaInfo": {
+                "label": "HeatTransferPlatesMaterial",
+                "description": "Material of heat transfer plates",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "201/202L",
+                "unit": null
+            },
+            "content_refs": [86]
+        },
+        {
+            "paramKey": "MetalLinedFlangeConnectionMaterial",
+            "schemaInfo": {
+                "label": "MetalLinedFlangeConnectionMaterial",
+                "description": "Material of metal ligned flange connections",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "stainless steel",
+                "unit": null
+            },
+            "content_refs": [90]
+        },
+        {
+            "paramKey": "RubberLinedFlangeConnectionMaterial",
+            "schemaInfo": {
+                "label": "RubberLinedFlangeConnectionMaterial",
+                "description": "Material of rubber ligned flange connections",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "CGB",
+                "unit": null
+            },
+            "content_refs": [90]
+        },
+        {
+            "paramKey": "ADpvcALSFlangeConnectionStandard",
+            "schemaInfo": {
+                "label": "ADpvcALSFlangeConnectionStandard",
+                "description": "Flange Connection standard for frame type AD with pvcALS",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "EN 1092-1 DN80 PN10 ASME B16.5 Class 150 NPS 3 JIS B2220 10K 80A",
+                "unit": null
+            },
+            "content_refs": [127]
+        },
+        {
+            "paramKey": "ADPEDFlangeConnectionStandard",
+            "schemaInfo": {
+                "label": "ADPEDFlangeConnectionStandard",
+                "description": "Flange Connection standard for frame type AD with PED",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "EN 1092-1 DN80 PN10 ASME B16.5 Class 150 NPS 3.",
+                "unit": null
+            },
+            "content_refs": [129]
+        },
+        {
+            "paramKey": "EGASMEFlangeConnectionStandard",
+            "schemaInfo": {
+                "label": "EGASMEFlangeConnectionStandard",
+                "description": "Flange Connection standard for frame type EG with ASME",
+                "type": "object",
+                "desiredUnit": null
+            },
+            "gt_value": {
+                "value": "ASME B16.5 Class 150 NPS 3 EN 1092–1 DN80 PN16.",
+                "unit": null
+            },
+            "content_refs": [133]
+        }
+    ],
+    "multihop": [
+        {
+            "paramKey": "ResidualHeightAD",
+            "schemaInfo": {
+                "label": "ResidualHeightFM",
+                "description": "Height distance from port center of frame type AD to edge of heat exchanger",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 137,
+                "unit": "mm"
+            },
+            "content_refs": [51, 60]
+        },
+        {
+            "paramKey": "ResidualHeightALB",
+            "schemaInfo": {
+                "label": "ResidualHeightALB",
+                "description": "Height distance from port center of frame type ALB to edge of heat exchanger",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 135,
+                "unit": "mm"
+            },
+            "content_refs": [51, 68]
+        },
+        {
+            "paramKey": "VerticalDistanceAD",
+            "schemaInfo": {
+                "label": "VerticalDistanceAD",
+                "description": "Vertical distance between ports of frame type AD",
+                "type": "object",
+                "desiredUnit": "mm"
+            },
+            "gt_value": {
+                "value": 576,
+                "unit": "mm"
+            },
+            
+            "content_refs": [51, 60]
+        }
+    ]
+}

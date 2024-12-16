@@ -1,0 +1,18 @@
+
+{
+	"name": "python3",
+	"build": {
+		"dockerfile": "../docker/dev.Dockerfile"
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [], 
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi",
+	"runArgs": [
+		"--network=host"
+    ],
+
+	"remoteUser": "root"
+}

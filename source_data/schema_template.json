@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "JSON schema defining the parameters that are do be extracted from a datasheet.",
+    "definitions": {
+        "bboxes": {
+            "description": "List of Bounding boxes (xyxy notation) outlining the information in the original document required to extract the parameter. If the parameter is explicitly stated this list usually contains only 1 bbox. If information from multiple location needs to be combined, it contains the bbox to each of those locations.",
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "number"
+                },
+                "minItems": 4,
+                "maxItems": 4
+            },
+            "minItems": 1
+        },
+        "pageIndexes": {
+            "description": "Index of the pages required to extract the specific parameter. Can be multiple pages if information is distributed across pages.",
+            "type": "array",
+            "items": {
+                "type": "integer"
+            },
+            "minItems": 1
+        },
+        "parameter_properties": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Value of the parameter",
+                    "type": ["number", "string"]
+                },
+                "unit": {
+                    "description": "Unit of the parameter. For unitless parameters this can be null.",
+                    "type": ["string", "null"]
+                },
+                "bboxes": {
+                    "$ref": "#/definitions/bboxes"
+                },
+                "pageIndexes": {
+                    "$ref": "#/definitions/pageIndexes"
+                }
+            },
+            "additionalProperties": false,
+            "required": ["value", "unit", "bboxes", "pageIndexes"]
+        }
+    },
+    "type": "object",
+    "properties": {
+    },
+    "additionalProperties": false
+}

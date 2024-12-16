@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "syntetic-pdf-generator"
+version = "0.1.0"
+description = ""
+authors = ["melonkernel <toffe@bskog.com>"]
+readme = "README.md"
+packages = [{include = "syntetic_pdf_generator"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pylatex = "^1.4.2"
+xlsxwriter = "^3.2.0"
+fpdf = "^1.7.2"
+python-docx = "^1.1.2"
+python-fasthtml = "^0.5.1"
+python-dotenv = "^1.0.1"
+pdfkit = "^1.0.0"
+selenium = "^4.24.0"
+webdriver-manager = "^4.0.2"
+reportlab = "^4.2.2"
+pypdf2 = "^3.0.1"
+jsonpath-ng = "^1.6.1"
+tqdm = "^4.66.5"
+ipykernel = "^6.29.5"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.1.1"
+pymupdf = "^1.24.13"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

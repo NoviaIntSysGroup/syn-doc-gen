@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Content</title>
+    <style>
+        /* Define root variables for general styling */
+        :root {
+            /* Colors */
+            --background-color: #ffffff;
+            --text-color: #000000;
+            --heading-color: #333333;
+            --link-color: #0066cc;
+            --border-color: #cccccc;
+            --bbox-border-color: rgba(0, 0, 0, 0.2);
+
+            /* Fonts */
+            --font-family-sans-serif: Arial, sans-serif;
+            --font-family-serif: Georgia, serif;
+            --font-family-monospace: 'Courier New', monospace;
+            --base-font-size: 16px;
+
+            /* Font Sizes */
+            --heading1-font-size: 24px;
+            --heading2-font-size: 20px;
+            --heading3-font-size: 18px;
+            --paragraph-font-size: 16px;
+            --small-font-size: 14px;
+
+            /* Line Heights */
+            --line-height-normal: 1.5;
+
+            /* Spacing */
+            --spacing-none: 0;
+            --spacing-xs: 0.25em;
+            --spacing-sm: 0.5em;
+            --spacing-md: 1em;
+            --spacing-lg: 1.5em;
+            --spacing-xl: 2em;
+
+            /* Page Dimensions */
+            --page-width: 8.27in;  /* A4 width */
+            --page-height: 11.69in;  /* A4 height */
+            --page-padding: 1cm;
+
+            /* Borders */
+            --border-width: 1px;
+            --border-style: solid;
+
+            /* Table */
+            --table-border-collapse: collapse;
+            --table-cell-padding: 0.5em;
+            --table-header-background-color: #f2f2f2;
+
+            /* Image */
+            --image-max-width: 100%;
+        }
+
+        /* REPLACE THIS FOR VARIABLE OVERRIDES */
+        
+
+        
+
+
+        /* Body Styles */
+        body {
+            font-family: var(--font-family-sans-serif);
+            font-size: var(--base-font-size);
+            line-height: var(--line-height-normal);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: var(--spacing-none);
+            padding: var(--spacing-none);
+            width: var(--page-width);
+            height: var(--page-height);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* Page Styles */
+        .page {
+            width: var(--page-width);
+            min-width: var(--page-width);
+            max-width: var(--page-width);
+            height: var(--page-height);
+            min-height: var(--page-height);
+            max-height: var(--page-height);
+            margin: var(--spacing-none);
+            padding: var(--page-padding);
+            background-color: var(--background-color);
+            box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            overflow: hidden;
+            page-break-after: always;
+            position: relative; /* Needed for absolute positioning of bounding boxes */
+        }
+
+
+        .typography-variation-1 {
+            --text-color: #000000;
+            --heading-color: #333333;
+            --link-color: #0066cc;
+            --border-color: #cccccc;
+            --bbox-border-color: rgba(0, 0, 0, 0.2);
+
+            /* Fonts */
+            --font-family-sans-serif: Arial, sans-serif;
+            --font-family-serif: Georgia, serif;
+            --font-family-monospace: 'Courier New', monospace;
+            --base-font-size: 16px;
+
+            /* Font Sizes */
+            --heading1-font-size: 24px;
+            --heading2-font-size: 20px;
+            --heading3-font-size: 18px;
+            --paragraph-font-size: 16px;
+            --small-font-size: 14px;
+
+            /* Line Heights */
+            --line-height-normal: 1.5;
+        }
+
+
+        /* Page Content */
+        .page-content {
+            height: calc(100% - (2 * var(--page-padding)));
+            overflow: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, p, ul {
+            margin: var(--spacing-none);
+            padding: var(--spacing-none);
+        }
+
+        h1 {
+            font-size: var(--heading1-font-size);
+            color: var(--heading-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h2 {
+            font-size: var(--heading2-font-size);
+            color: var(--heading-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h3 {
+            font-size: var(--heading3-font-size);
+            color: var(--heading-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        p {
+            font-size: var(--paragraph-font-size);
+            margin-bottom: var(--spacing-md);
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--list-item-font-size);
+        }
+
+        /* Custom List Styles */
+        .list-style-1 {
+            list-style-type: circle;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .list-style-1 li {
+            margin-bottom: var(--spacing-xs);
+            font-size: var(--list-item-font-size);
+        }
+
+        .list-style-2 {
+            list-style-type: square;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .list-style-2 li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .list-style-3 {
+            list-style-type: disc;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .list-style-3 li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .list-style-4 {
+            list-style-type: decimal;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .list-style-4 li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .list-style-5 {
+            list-style-type: lower-roman;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .list-style-5 li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .list-style-6 {
+            list-style-type: upper-alpha;
+            margin-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .list-style-6 li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .one-column {
+            column-count: 1;
+            column-gap: var(--spacing-lg);
+        }
+
+        .two-columns {
+            column-count: 2;
+            column-gap: var(--spacing-lg);
+        }
+
+        .three-columns {
+            column-count: 3;
+            column-gap: var(--spacing-lg);
+        }
+
+        .rotated {
+            writing-mode: vertical-rl;
+            
+        }
+
+        li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* Links */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        /* Images */
+        img {
+            max-width: var(--image-max-width);
+            height: auto;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: var(--table-border-collapse);
+            margin-bottom: var(--spacing-md);
+            
+        }
+
+        th, td {
+            border: var(--border-width) var(--border-style) var(--border-color);
+            padding: var(--table-cell-padding);
+            text-align: left;
+            font-size: var(--table-font-size); /* Set the font size for the table */
+        }
+
+        th {
+            background-color: var(--table-header-background-color);
+            font-family: var(--table-heading-font);
+
+        }
+
+        table {
+            border:none;
+            --table-header-background-color: inherit;
+            font-family: var(--table-font);
+            font-size: var(--table-font-size); /* Set the font size for the table */
+
+        }
+
+        /* New Table Classes */
+        table.no-borders, table.no-borders td, table.no-borders th {
+            border: none; /* No borders */
+            --border-width: 0px;
+        }
+
+        table.underline-first-row th {
+            border-bottom: 2px solid var(--border-color); /* Underline on the first row */
+            --table-header-background-color: inherit;
+        }
+
+        table.colorize-first-row th {
+            --table-header-background-color: #f2f2f2;
+        }      
+        
+        table.transparent-first-row th {
+            --table-header-background-color: transparent;
+        }      
+
+        table.grid-border {
+            --border-width: 1px;
+            
+            border: var(--border-width) solid var(--border-color); /* Grid border for all cells */
+            border-collapse: collapse;
+        }
+
+        table.grid-border th, table.grid-border td {
+            border: var(--border-width) solid var(--border-color); /* Grid border for all cells */
+            border-collapse: collapse;
+        }
+
+        /* Table Container Styles */
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+
+        .table-container.rotate-90 {
+            transform: rotate(90deg);
+            transform-origin: left bottom;
+        }
+        .table-container.rotate-90 table {
+            margin-left: 4rem;
+        }
+
+        .table-container.rotate-180 {
+            transform: rotate(180deg);
+            transform-origin: left bottom;
+        }
+        .table-container.rotate-90 table {
+            margin-right: 4rem;
+        }
+
+        .table-container.full-width {
+            width: 100%;
+        }
+
+        .table-container.narrow-center {
+            width: 50%;
+            margin: auto;
+        }
+
+        .table-container.to-left {
+            justify-content: flex-start;
+        }
+
+        .table-container.to-right {
+            justify-content: flex-end;
+        }
+
+
+        /* BBox (Bounding Box) Styles for Debugging */
+        .bbox {
+            display: none; /* Set to 'block' to show bounding boxes */
+            position: absolute;
+            border: 2px dashed var(--bbox-border-color);
+            background-color: var(--bbox-border-color);
+        }
+
+        .bbox span {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: var(--background-color);
+            padding: var(--spacing-xs);
+            font-size: var(--small-font-size);
+        }
+
+        /* Media Query for Print */
+        @media print {
+            body {
+                margin: var(--spacing-none);
+                padding: var(--spacing-none);
+                width: var(--page-width);
+                height: var(--page-height);
+            }
+            .page {
+                margin: var(--spacing-none);
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+
+        #seed-slider-container {
+            z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: calc(var(--page-width) + 5rem);
+            width: calc(100vw - var(--page-width) - 10rem);
+        }
+
+        #seed-slider-container label {
+            width: 20%;
+        }
+
+        #seed-slider-container input {
+            width: 80%;
+        }
+        /* REPLACE THIS FOR STYLE OVERRIDES */
+    </style>
+
+<script>
+    
+    
+    window.config = {
+        "column_classes": ["one-column", "two-columns", "three-columns"],
+        "list_classes": ['list-style-1', 'list-style-2', 'list-style-3', 'list-style-4', 'list-style-5', 'list-style-6'],
+        "table_border_classes": ['no-borders', 'underline-first-row', 'grid-border'],
+        "table_classes": ['rotate-90', 'full-width', 'narrow-center', 'to-left', 'to-right'],
+        "table_color_classes": ['colorize-first-row', 'transparent-first-row'],
+        "heading_fonts": ["Oswald", "Inter", "Orbitron", "Anton", "Playfair Display"],
+        "body_fonts": ["Roboto", "Merriweather", "Open Sans", "Lato", "Nunito"],
+        "image_max_width": [70, 80, 90, 100],
+        "heading1_font_size": {'from': 20, 'to': 42},
+        "line_height_size": {'from': 1.0, 'to': 2.0, step:0.05}
+    }
+    window.config["heading2_font_size"] = {'from': 14, 'to': window.config["heading1_font_size"]["from"]}
+    window.config["heading3_font_size"] = {'from': 12, 'to': window.config["heading2_font_size"]["from"]}
+    window.config["paragraph_font_size"] = {'from': 8, 'to': window.config["heading3_font_size"]["from"]}
+    window.config["small_font_size"] = {'from': 6, 'to': window.config["paragraph_font_size"]["from"]}
+
+    // CONFIG OVERWRITE
+    window.config_overwrite = CONFIG_OVERWRITE;
+
+    for (const key in window.config_overwrite) {
+        if (window.config_overwrite.hasOwnProperty(key) && window.config.hasOwnProperty(key)) {
+            window.config[key] = window.config_overwrite[key]; // Update the config with the new value
+        }
+    }
+
+    console.log("Updated config: ", window.config)
+    console.info(window.config)
+
+    window.json_data = JSON_DATA; // this data is passed from the python script via string replacement
+    window.generated_seed = MY_SEED;
+
+    if (!window.generated_seed) {
+        window.generated_seed = 1;
+    }
+        
+        // Function to create and handle the slider
+        function setupSeedSlider() {
+            const seedSlider = document.getElementById('seedSlider');
+            const seedValueDisplay = document.getElementById('seedValue');
+
+            seedSlider.addEventListener('input', (event) => {
+                window.generated_seed = event.target.value; // Update the seed value
+                seedValueDisplay.textContent = window.generated_seedseed; // Update displayed value
+                
+                document.getElementById('content').innerHTML = '<div class="page" id="page1"><div class="page-content"></div></div>';
+                window.currentPage = 1;
+                
+                paginateContent(); // Re-execute paginateContent
+            });
+        }
+
+    function pick_class(options, additional_seed=0) {
+
+        let seedRandom = (seed) => {
+            // Simple seeded random function
+            const x = Math.sin(seed + additional_seed + 1) * 1000000;
+            return x - Math.floor(x);
+        };
+
+        let index = Math.floor(seedRandom(window.generated_seed) * options.length);
+        return options[index];
+    }
+    function hashStringToNumber(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+            hash |= 0; // Convert to 32bit integer
+        }
+        return Math.abs(hash);
+    }
+
+    function obj2nr(obj) {
+        // Step 1: Convert object to a JSON string
+        let jsonString = JSON.stringify(obj);
+        
+        // Step 2: Remove all occurrences of id=".*?"
+        jsonString = jsonString.replace(/"id":\s*".*?"/g, ""); // Updated regex to match id in JSON format
+        
+        // Step 3: Hash the cleaned JSON string to a number
+        const hashedNumber = hashStringToNumber(jsonString);
+
+        // Step 4: Return the hashed number
+        return hashedNumber;
+    }    
+    let layoutToggle = 0; // Toggle between different layouts
+    window.currentPage = 1;
+
+    window.colors = {
+        'title': 'red',
+        'subtitle': 'blue',
+        'text': 'green',
+        'list': 'purple',
+        'list-item': 'darkblue',
+        'image': 'orange',
+        'table': '#ADD8E6',  // Light Yellow
+        'table-cell': '#FFFF66',  // Lighter Yellow
+        'col-header': '#A52A2A',  // Darker Brown
+        'row-header': '#8B4513',  // Saddle Brown
+        'unknown': 'darkgray'
+    };
+
+    window.element_map = {
+        'title': 'h1',
+        'subtitle': 'h2',
+        'text': 'p',
+        'list': 'ul',
+        'list-item': 'li',
+        'image': 'img',
+        'table': 'table',
+        'table-cell': 'td',
+        'table-col-header': 'th',
+        'table-row-header': 'th',
+        'unknown': 'div'
+    };
+
+    //window.heading_fonts = [ "Oswald", "Playfair Display", "Montserrat", "Raleway", "Poppins", "Lora", "Bebas Neue", "Anton", "Abril Fatface", "Merriweather", "Lobster", "Roboto Slab", "Cormorant Garamond", "Amatic SC", "Work Sans", "PT Serif", "Vollkorn", "Fira Sans", "Josefin Sans", "Rubik", "Alice", "Alegreya", "Arvo", "Bree Serif", "Chivo", "Cinzel", "Dosis", "Exo", "Fjalla One", "Great Vibes", "Heebo", "IBM Plex Sans", "Kaushan Script", "Libre Baskerville", "Maven Pro", "Mulish", "Pacifico", "Patua One", "Quattrocento", "Righteous", "Satisfy", "Titillium Web", "Ultra", "Zilla Slab"];
+    //window.body_fonts = [ "Roboto", "Open Sans", "Lato", "Merriweather", "Nunito", "Crimson Text", "Libre Baskerville", "Source Sans Pro", "Noto Sans", "Spectral", "Cabin", "IBM Plex Sans", "Arimo", "Mulish", "Quicksand", "Zilla Slab", "Oxygen", "Karla", "Inter", "EB Garamond", "PT Sans", "Hind", "Work Sans", "Fira Sans", "Josefin Sans", "Droid Sans", "Ubuntu", "Public Sans", "Manrope", "Assistant", "Barlow", "Muli", "Tinos", "Rasa", "Heebo", "Varela Round", "Chivo", "Noto Serif", "Slabo 27px", "Domine", "Alegreya", "Average Sans", "Martel", "Faustina", "Asap", "Raleway", "Fjalla One", "Signika"];
+    //window.monospace_fonts = [ "Roboto Mono", "Source Code Pro", "Fira Code", "Inconsolata", "IBM Plex Mono", "Ubuntu Mono", "Space Mono", "JetBrains Mono", "Anonymous Pro", "Cousine", "Overpass Mono", "Share Tech Mono", "Cutive Mono", "DM Mono", "Nova Mono", "Lekton", "Oxygen Mono", "PT Mono", "Monoton", "Gloock"]
+
+    //window.heading1_font_size = {'from': 15, 'to': 42}
+    //window.heading2_font_size = {'from': 14, 'to': window.heading1_font_size}
+    //window.heading3_font_size = {'from': 10, 'to': window.heading2_font_size}
+    //window.paragraph_font_size = {'from': 6, 'to': window.heading3_font_size}
+    //window.small_font_size = {'from': 6, 'to': window.paragraph_font_size}
+    //window.line_height_size = {'from': 1.0, 'to': 2.0, step:0.05}
+ 
+
+    
+    
+
+    async function createElement(item, layoutType) {
+        let element;
+        let wrapper = document.createElement('div');
+        wrapper.classList.add('box');
+        additional_seed = obj2nr(item) // Extract numeric part from item.id
+        if (['title', 'subtitle', 'text', 'table-cell'].includes(item.type)) {
+            element = document.createElement(window.element_map[item.type]);
+
+            span = document.createElement('span');
+            span.innerText = item.content;
+            span.id = item.id;
+
+            element.appendChild(span);
+            if (item.type === 'text') {
+                // console.log(item.type, additional_seed);
+                span.id = null
+                element.id = item.id
+                element.classList.add(pick_class(config.column_classes, additional_seed)); // Add random column class
+            }   
+
+        } else if (item.type === 'list') {
+            element = document.createElement('ul');
+            element.id = item.id;
+            console.log(item.type, additional_seed);
+            
+            element.classList.add(pick_class(config.column_classes, additional_seed)); // Add random column class
+            element.classList.add(pick_class(config.list_classes, additional_seed))
+
+            item.content.forEach(listItem => {
+                let li = document.createElement('li');
+               
+                // We add the list item text to ta span and add the id to that for "targteing" when we detect the bboxes.
+                // so that we can apply the bounding box to the span and not the entire row as li are block elements and spans are inline
+                let span = document.createElement('span');
+                span.innerText = listItem.content;
+                span.id = listItem.id;
+                console.log("I am here at a list item .. " + listItem.content + " - " + listItem.id)
+                li.appendChild(span);
+                
+                element.appendChild(li);
+            
+            });
+        } else if (item.type === 'image') {
+            element = document.createElement('img');
+            element.id = item.id;
+            element.src = "data:image/png;base64," + item.content
+
+            span = document.createElement('span');
+            span.appendChild(element);
+            span.style.display = 'inline-block';
+            span.appendChild(element);
+
+            wrapper.style.textAlign = 'center';
+            wrapper.appendChild(span);
+            return wrapper;
+        } else if (item.type === 'table') {
+            element = document.createElement('table');
+            element.id = item.id;
+            element.classList.add(pick_class(config.table_border_classes, additional_seed)); // Randomly pick a class
+            element.classList.add(pick_class(config.table_color_classes, additional_seed+1)); // Randomly pick a class
+
+            let tableData = {};
+
+            // Organize table data by rows and columns
+            item.content.forEach(cellData => {
+                let row = cellData.row_nums[0];
+                let col = cellData.col_nums[0];
+                if (!tableData[row]) {
+                    tableData[row] = [];
+                }
+                tableData[row][col] = cellData;
+            });
+
+            // Create table rows and cells
+            Object.keys(tableData).forEach(rowIndex => {
+                let row = element.insertRow();
+                tableData[rowIndex].forEach(cellData => {
+                    let cell;
+                    if (cellData.col_header) {
+                        cell = document.createElement('th');
+                    } else {
+                        cell = document.createElement('td');
+                    }
+
+                    let span = document.createElement('span');
+                    span.innerText = cellData.text;
+                    span.id = cellData.id;                    
+                    cell.appendChild(span)
+                    row.appendChild(cell);
+                });
+            });
+            wrapper.classList.add('table-container');
+            wrapper.classList.add(pick_class(config.table_classes, additional_seed));
+        }
+
+
+        wrapper.appendChild(element);
+        return wrapper;
+    }
+
+    function redacc(number) {
+        return Math.round(number * 100) / 100;
+    }
+
+    function updateBoundingBox(item, wrapper) {
+        
+        let page = wrapper.closest('.page');
+        if (!page) {
+            console.error("Cannot find the closest page for item " + item.id);
+            return;
+        }
+        let pageIndex = Array.from(document.querySelectorAll('.page')).indexOf(page);
+
+        let relativeY = wrapper.offsetTop - page.offsetTop;
+
+        item.bounding_box = {
+            height: redacc((wrapper.offsetHeight / page.offsetHeight) * 100),  // Relative height
+            width: redacc((wrapper.offsetWidth / page.offsetWidth) * 100),    // Relative width
+            x: redacc((wrapper.offsetLeft / page.offsetWidth) * 100),         // Relative x position
+            //y: redacc((relativeY / page.offsetHeight) * 100),                 // Relative y position
+            y: redacc((wrapper.offsetTop / page.offsetHeight) * 100),                 // Relative y position
+        };
+        item.page_number = pageIndex + 1;
+        console.log(item.page_number + " - " +relativeY + " " + wrapper.offsetTop + " " + page.offsetTop)
+        // console.log(`Bounding box for item ${item.id}:`, item.bounding_box); // Debugging: Log bounding box
+
+        // Add bounding box element
+        let bbox = document.createElement('div');
+        bbox.classList.add('bbox');
+        bbox.style.borderColor = window.colors[item.type] || 'black'; // Set border color based on item type
+        bbox.style.borderWidth = '2px'; // Ensure the border is visible
+        bbox.style.borderStyle = 'solid'; // Ensure the border is solid
+        bbox.style.position = 'absolute'; // Set position to absolute
+
+        // Adjust top position for the bounding box
+        bbox.style.top = redacc((relativeY / page.offsetHeight) * 100) + '%'; // Use relativeY directly
+        bbox.style.left = redacc(wrapper.offsetLeft / page.offsetWidth * 100) + '%';
+        bbox.style.width = redacc(wrapper.offsetWidth / page.offsetWidth * 100) + '%';
+        bbox.style.height = redacc(wrapper.offsetHeight / page.offsetHeight * 100) + '%';
+
+        let span = document.createElement('span');
+        span.innerText = item.type; // Display the type as label
+        span.style.backgroundColor = window.colors[item.type] || 'black'; // Set background color based on item type
+        bbox.appendChild(span);
+        page.appendChild(bbox);
+    }
+
+    // Ensure each list item is processed individually
+    function processListItems(listElement) {
+        const listItems = listElement.querySelectorAll('li');
+        listItems.forEach(item => {
+            updateBoundingBox(item, item.parentElement);
+        });
+    }
+
+    function applyLayout(currentPageElement) {
+        layoutToggle = (layoutToggle + 1) % 3; // Cycle through 3 layouts
+
+        if (layoutToggle === 0) {
+            currentPageElement.classList.add('layout-row');
+        } else if (layoutToggle === 1) {
+            currentPageElement.classList.add('layout-column');
+        } else if (layoutToggle === 2) {
+            currentPageElement.classList.add('layout-row');
+        }
+    }
+
+    function createNewPage() {
+        currentPage++;
+        let newPage = document.createElement('div');
+        newPage.classList.add('page');
+        newPage.id = 'page' + currentPage;
+
+        let pageContent = document.createElement('div');
+        pageContent.classList.add('page-content');
+        newPage.appendChild(pageContent);
+        // console.log(document.getElementById('content'));
+        document.getElementById('content').appendChild(newPage);
+
+        // Apply alternating layout styles
+        applyLayout(pageContent);
+
+        return pageContent;
+    }
+
+    function pick_range(start, end, step) {
+        const result = [];
+        for (let i = start; i <= end; i += step) {
+            result.push(i);
+        }
+        return result;
+    }
+
+    function pick_from(settings) {
+        start = settings.from
+        end = settings.to
+        step = settings.step || 1
+        return pick_class(pick_range(start, end, step))
+    }
+
+    function setupStyles() {
+        // heading font is used for every heading
+        let heading1_font = pick_class(config.heading_fonts, 1);
+        let heading1_font_size = pick_from(config.heading1_font_size);
+
+        let heading2_font = heading1_font //pick_class(config.heading_fonts, 2);
+        let heading2_font_size = pick_from(config.heading2_font_size);
+
+        let heading3_font = heading1_font //pick_class(config.heading_fonts, 3);
+        let heading3_font_size = pick_from(config.heading3_font_size);
+
+        let paragraph_font = pick_class(config.body_fonts, 1);
+        let paragraph_font_size = pick_from(config.paragraph_font_size);
+        let small_font = pick_class(config.body_fonts, 2);
+        let small_font_size = pick_from(config.small_font_size);
+
+        let line_height = pick_from(config.line_height_size);
+        // let monospace_font = pick_class(window.monospace_fonts, 1);
+
+        let table_font = pick_class([paragraph_font], 3);
+        let table_heading_font = pick_class([table_font], 3);
+
+        let image_max_width = pick_class(config.image_max_width)
+
+
+        let google_fonts = [
+            heading1_font,
+            heading2_font,
+            heading3_font,
+            paragraph_font,
+            small_font,
+            // monospace_font
+        ];
+
+        google_fonts.forEach(font => {
+            let linkTag = document.createElement('link');
+            linkTag.rel = 'stylesheet';
+            linkTag.href = `https://fonts.googleapis.com/css2?family=${font}:ital,wght@0,400;0,700;1,400;1,700&display=swap`;
+            document.head.appendChild(linkTag);
+        });
+
+        let styleTag = document.createElement('style');
+        styleTag.type = 'text/css';
+        styleTag.innerHTML = `
+            body {
+                --font-family-sans-serif: ${heading2_font}, sans-serif;
+                --font-family-serif: ${paragraph_font}, serif;
+                --heading1-font: ${heading1_font};
+                --heading1-font-size: ${heading1_font_size}px;
+                --heading2-font: ${heading2_font};
+                --heading2-font-size: ${heading2_font_size}px;
+                --heading3-font: ${heading3_font};
+                --heading3-font-size: ${heading3_font_size}px;
+                --paragraph-font: ${paragraph_font};
+                --paragraph-font-size: ${paragraph_font_size}px;
+                --small-font: ${small_font};
+                --small-font-size: ${small_font_size}px;
+                --line-height: ${line_height};
+                --table-font: ${table_font};
+                --table-font-size: ${paragraph_font_size}px;
+                --table-heading-font: ${table_heading_font};
+                --list-font: ${paragraph_font};
+                --list-item-font-size: ${paragraph_font_size}px;
+                --image-max-width: ${image_max_width}%;
+            }
+        `;
+        document.head.appendChild(styleTag);
+    }
+
+    async function paginateContent() {
+        let currentPageElement = document.querySelector('#page' + currentPage + ' .page-content');
+
+        for (const section of window.json_data.content) {
+            for (const item of section.content) {
+                let layoutType = layoutToggle === 2 ? 'rotated' : layoutToggle === 1 ? 'half-width' : 'full-width';
+                let element = await createElement(item, layoutType);
+
+                currentPageElement.appendChild(element);
+
+                // Force a reflow to ensure the element is rendered
+                currentPageElement.offsetHeight;
+
+                // Check if the element causes overflow using getBoundingClientRect
+                let contentRect = currentPageElement.getBoundingClientRect();
+                let elementRect = element.getBoundingClientRect();
+
+                // Calculate the relative position of the element within the current page
+                let relativeElementBottom = elementRect.bottom - contentRect.top;
+
+                if (relativeElementBottom > contentRect.height) {
+                    // Remove the overflowing element
+                    currentPageElement.removeChild(element);
+
+                    // Create a new page and append the element to the new page
+                    currentPageElement = createNewPage();
+                    currentPageElement.appendChild(element);
+
+                    // Recalculate the contentRect for the new page
+                    contentRect = currentPageElement.getBoundingClientRect();
+
+                    // console.log(Moved element with ID: ${item.id} to new page ${currentPage} -- ${relativeElementBottom} > ${contentRect.height});
+                } else {
+                    // console.log(Element with ID: ${item.id} fits on page ${currentPage} -- ${relativeElementBottom} <= ${contentRect.height});
+                }
+            }
+        }
+
+        // Update bounding boxes and content JSON data
+        window.json_data.content.forEach(section => {
+            section.content.forEach(async item => {
+                let element = document.getElementById(item.id);
+                if (element) {
+                    let wrapper = element.parentElement;
+                    if (item.type === 'image') {
+                        // console.log("checking image");
+                        if (element.complete) {
+                            // Image is already loaded
+                            //console.log("image is already loaded");
+                            updateBoundingBox(item, element);
+                        } else {
+                            await new Promise((resolve) => {
+                                element.onload = () => {
+                                    // console.log("IMAGEEEEEE");
+                                    updateBoundingBox(item, element);
+                                    resolve();
+                                };
+                            });
+                        }
+                    } else if (item.type === 'table') {
+                        updateBoundingBox(item, wrapper);
+                        let max_x = 0;
+                        item.content.forEach(tableItem => {
+                            // console.log(Updating bounding box for list item ${listItem.id});
+                            let span = document.getElementById(tableItem.id);
+                            let cell = span.parentNode;
+                            updateBoundingBox(tableItem, cell);
+                            // Calculate the bounding box for the span
+                            let rect = cell.getBoundingClientRect();
+                            let pageRect = wrapper.closest('.page').getBoundingClientRect();
+                            let relativeX = rect.left - pageRect.left;
+                            let relativeY = rect.top - pageRect.top;
+
+                            tableItem.bounding_box = {
+                                height: redacc((rect.height / pageRect.height) * 100),  // Relative height
+                                width: redacc((rect.width / pageRect.width) * 100),  // Relative width
+                                x: redacc((relativeX / pageRect.width) * 100),  // Relative x position
+                                y: redacc((relativeY / pageRect.height) * 100),  // Relative y position
+                            };
+                            max_x = Math.max(max_x, relativeX + rect.width);
+
+                        });
+                        // item.bounding_box.width = redacc((max_x / wrapper.closest('.page').offsetWidth) * 100);
+                    } else if (item.type === 'list') {
+                        updateBoundingBox(item, wrapper);
+                        // let max_w = 0;
+                        let max_x = 0;
+                        // let min_x = wrapper.closest('.page').offsetLeft;
+                        item.content.forEach(listItem => {
+                            // console.log(Updating bounding box for list item ${listItem.id});
+                            let span = document.getElementById(listItem.id);
+                            updateBoundingBox(listItem, span);
+                            // max_w = Math.max(max_w, span.offsetWidth);
+                            // min_x = Math.min(min_x, span.offsetLeft);
+                            max_x = Math.max(max_x, span.offsetLeft + span.offsetWidth);
+                        });
+                        // let diff = min_x - wrapper.closest('.page').offsetLeft;
+                        // item.bounding_box.width = ((max_w + diff/2) / wrapper.closest('.page').offsetWidth) * 100 + '%';
+                        item.bounding_box.width = redacc((max_x / wrapper.closest('.page').offsetWidth) * 100);
+                    } else if (element.nodeName.toLowerCase() === 'span') {
+                        updateBoundingBox(item, element.parentElement);
+                        item.bounding_box.width = redacc(((element.offsetWidth) / wrapper.closest('.page').offsetWidth) * 100);
+                    } else {
+                        updateBoundingBox(item, wrapper);
+                    }
+                }
+            });
+        });
+    }
+
+    window.onload = async () => {
+        console.log("Starting setupFonts");
+        setupStyles();
+
+        await document.fonts.ready;
+
+        await new Promise(resolve => setTimeout(resolve, 4000));
+
+        console.log("Starting paginateContent");
+        await paginateContent();
+        setupSeedSlider(); // Initialize the slider setup
+
+    };
+</script>    
+</head>
+<body>
+<div id="content">
+    <div class="page" id="page1">
+        <div class="page-content"></div>
+    </div>
+</div>
+<div id="seed-slider-container">
+    <label for="seedSlider">Adjust Seed: <span id="seedValue">0</span></label>
+    <input type="range" id="seedSlider" min="0" max="100" value="42" step="1">
+</div>
+</body>
+</html>
